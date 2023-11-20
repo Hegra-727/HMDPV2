@@ -53,7 +53,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
         //3. 符合，生成验证码
         String code = RandomUtil.randomNumbers(6);
-        //4. 保存验证码到redis
+        //4. 保存验证码到redis（常量and手机号码+六位验证码+过期时间+时间单位）
         stringRedisTemplate.opsForValue().set(LOGIN_CODE_KEY+phone,code,LOGIN_CODE_TTL, TimeUnit.MINUTES);
         //5. 发送验证码
         log.debug("发送短信验证码成功，验证码:{}",code);
